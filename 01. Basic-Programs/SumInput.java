@@ -7,5 +7,6 @@ public class SumInput {
         int b = sc.nextInt();
 
         System.out.print(a+b);
+        sc.close();
     }
 }

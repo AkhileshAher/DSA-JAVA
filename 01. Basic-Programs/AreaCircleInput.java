@@ -7,5 +7,6 @@ public class AreaCircleInput {
         float rad = sc.nextFloat();
         float area = 3.142f * rad * rad;
         System.out.print(area);
+        sc.close();
     }
 }
