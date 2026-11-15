@@ -1,0 +1,77 @@
+import java.lang.*;
+import java.util.*;
+
+@SuppressWarnings("unchecked")
+public class ConnectedComponentTraversal {
+
+	static class Edge {
+		int src;
+		int dest;
+	
+		public Edge(int src,int dest) {
+			this.src = src;
+			this.dest = dest;
+		}	
+	
+	}
+
+	static void createGraph(ArrayList<Edge> [] graph) {
+		
+		for(int i=0;i<graph.length;i++) {
+			graph[i] = new ArrayList<>();
+		}
+		
+		graph[0].add(new Edge(0,1));
+
+		graph[1].add(new Edge(1,0));
+		graph[1].add(new Edge(1,2));
+		graph[1].add(new Edge(1,3));
+
+		graph[2].add(new Edge(2,1));
+
+		graph[3].add(new Edge(3,1));
+		graph[3].add(new Edge(3,4));
+
+		graph[4].add(new Edge(4,3));
+		graph[4].add(new Edge(4,5));
+
+		graph[5].add(new Edge(5,4));
+	
+		graph[6].add(new Edge(6,7));
+		graph[6].add(new Edge(6,8));
+		
+		graph[7].add(new Edge(7,6));
+
+		graph[8].add(new Edge(8,6));
+
+		graph[9].add(new Edge(9,9));
+	}
+
+	public static void dfs(ArrayList<Edge>[] graph) {
+		boolean[] visited = new boolean[graph.length];
+		for(int i=0;i<graph.length;i++) {
+			if(!visited[i]) {
+				dfsUtil(graph,visited,i);
+			}
+		}
+	}
+
+	public static void dfsUtil(ArrayList<Edge>[] graph,boolean[] visited,int curr) {
+		System.out.print(curr + " ");
+		visited[curr] = true;	
+		for(int i =0;i<graph[curr].size();i++) {
+			Edge e = graph[curr].get(i);
+			if(!visited[e.dest]) {	
+				dfsUtil(graph,visited,e.dest);
+			}
+		}
+	}
+
+	public static void main(String [] args) {
+		int V = 10;
+		ArrayList<Edge>[] graph = new ArrayList[V];
+		createGraph(graph);
+		dfs(graph);
+	}
+
+}
